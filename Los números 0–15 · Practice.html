@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los números 0–15 · Practice</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;700;800&display=swap">
+<style>
+  :root{--navy:#1F2A44;--navy2:#2E3C5C;--cream:#FBF7F0;--sand:#F3E9DC;--paper:#FFFDF8;--orange:#E2582B;--dorange:#B8461F;--teal:#2A7F8F;--dteal:#1F6B78;--yellow:#F2B544;--lyellow:#FBE3B0;--dyellow:#8A5A00;--line:#E2D3BF;--muted:#4A5568;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--navy);font-family:'Nunito Sans',Arial,sans-serif;font-size:18px;line-height:1.45}
+  h1,h2,h3,.fred{font-family:'Fredoka','Nunito Sans',Arial,sans-serif;font-weight:600;margin:0}
+  header{background:var(--navy);color:var(--cream);padding:18px 20px 14px}
+  .wrap{max-width:900px;margin:0 auto}
+  .eyebrow{font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--yellow)}
+  header h1{font-size:34px;line-height:1.1;margin-top:4px}
+  .stripe{height:8px;background:linear-gradient(90deg,var(--orange) 0 33%,var(--yellow) 33% 67%,var(--teal) 67%)}
+  nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  nav button{font:inherit;font-size:14px;font-weight:800;border:0;border-radius:999px;padding:6px 12px;cursor:pointer;background:var(--navy2);color:#D9DEE8}
+  nav button.on{background:var(--yellow);color:var(--navy)}
+  nav button.done{background:var(--teal);color:var(--cream)}
+  nav button:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+  .bar{height:10px;background:var(--navy2);border-radius:999px;margin-top:12px;overflow:hidden}
+  .bar>i{display:block;height:100%;background:var(--yellow);width:0;transition:width .3s}
+  main{padding:22px 20px 60px}
+  .card{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:22px;margin-bottom:16px}
+  .tag{display:inline-block;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:999px;color:var(--cream);background:var(--orange)}
+  .tag.teal{background:var(--dteal)} .tag.yel{background:var(--yellow);color:var(--navy)} .tag.navy{background:var(--navy)}
+  h2{font-size:30px;margin:10px 0 6px}
+  .instr{color:var(--muted);margin:0 0 4px}
+  .tip{background:var(--lyellow);border-radius:14px;padding:10px 14px;margin:12px 0 0;font-size:16px}
+  .btn{font:inherit;font-weight:800;border:0;border-radius:14px;padding:12px 20px;cursor:pointer;background:var(--orange);color:var(--cream);font-size:17px}
+  .btn.teal{background:var(--dteal)} .btn.ghost{background:var(--sand);color:var(--navy)} .btn.navy{background:var(--navy)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .q{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 0;border-top:1px dashed var(--line)}
+  .q:first-of-type{border-top:0}
+  .qn{font-family:'Fredoka',Arial,sans-serif;font-weight:600;color:var(--dorange);font-size:22px;min-width:30px}
+  .big{font-family:'Fredoka',Arial,sans-serif;font-weight:600;font-size:40px;min-width:70px;text-align:center}
+  input[type=text]{font:inherit;font-size:20px;padding:10px 12px;border:2px solid var(--line);border-radius:12px;width:200px;background:#fff;color:var(--navy)}
+  input.ok{border-color:var(--teal);background:#E6F4F1}
+  input.bad{border-color:var(--orange);background:#FDEDE6}
+  .fb{font-weight:800;font-size:16px;min-height:22px}
+  .fb.ok{color:var(--dteal)} .fb.bad{color:var(--dorange)}
+  .grid16{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+  .ncard{border:0;border-radius:16px;padding:12px;text-align:left;cursor:pointer;font:inherit;display:flex;flex-direction:column;gap:2px}
+  .ncard .n{font-family:'Fredoka',Arial,sans-serif;font-size:38px;font-weight:600;line-height:1}
+  .ncard .w{font-family:'Fredoka',Arial,sans-serif;font-size:22px;font-weight:600}
+  .ncard .s{font-size:14px;color:var(--muted)}
+  .g1{background:#FDE6DC}.g1 .n{color:var(--dorange)} .g2{background:#DCEFF2}.g2 .n{color:var(--dteal)} .g3{background:var(--lyellow)}.g3 .n{color:var(--dyellow)}
+  .ncard.heard{box-shadow:inset 0 0 0 3px var(--navy)}
+  .pic{background:var(--sand);border-radius:16px;padding:10px 12px;display:inline-flex;flex-wrap:wrap;gap:6px;max-width:420px}
+  .plus{font-family:'Fredoka',Arial,sans-serif;font-size:34px;font-weight:600;padding:0 6px}
+  .key{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;margin:10px 0}
+  .key div{background:var(--sand);border-radius:10px;text-align:center;padding:6px 2px;font-weight:800}
+  .key b{display:block;font-family:'Fredoka',Arial,sans-serif;font-size:22px;color:var(--dteal)}
+  .slots{display:flex;gap:8px;margin:14px 0}
+  .slots span{width:52px;height:62px;border-radius:12px;background:var(--navy);color:var(--yellow);font-family:'Fredoka',Arial,sans-serif;font-size:36px;display:flex;align-items:center;justify-content:center}
+  .ws{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+  .wsgrid{display:grid;gap:3px;user-select:none}
+  .wsgrid button{width:34px;height:34px;border:0;border-radius:8px;background:var(--sand);font-family:'Fredoka',Arial,sans-serif;font-size:19px;font-weight:600;color:var(--navy);cursor:pointer;padding:0}
+  .wsgrid button.sel{background:var(--yellow)}
+  .wsgrid button.found{background:var(--teal);color:var(--cream)}
+  .wslist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px;font-weight:800;font-size:17px}
+  .wslist .f{color:var(--dteal);text-decoration:line-through}
+  .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+  .choices button{font:inherit;font-family:'Fredoka',Arial,sans-serif;font-size:26px;font-weight:600;padding:16px;border:0;border-radius:16px;background:var(--sand);color:var(--navy);cursor:pointer}
+  .timer{font-family:'Fredoka',Arial,sans-serif;font-size:44px;font-weight:600;color:var(--dorange)}
+  .cert{background:var(--navy);color:var(--cream);border-radius:26px;padding:28px;text-align:center;border:8px solid var(--yellow)}
+  .cert h2{color:var(--yellow);font-size:36px}
+  .cert table{margin:16px auto 0;border-collapse:collapse;font-size:18px}
+  .cert td{padding:6px 14px;border-bottom:1px solid var(--navy2);text-align:left}
+  .cert td:last-child{text-align:right;font-weight:800;color:var(--yellow)}
+  .hidden{display:none}
+  .sr{position:absolute;left:-9999px}
+  @media (max-width:640px){.grid16{grid-template-columns:repeat(2,minmax(0,1fr))}.key{grid-template-columns:repeat(4,minmax(0,1fr))}.wsgrid button{width:26px;height:26px;font-size:15px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Español 1 · Clase 6 · Practice on your own</div>
+    <h1>Los números 0–15</h1>
+    <nav id="nav" aria-label="Activities"></nav>
+    <div class="bar" aria-hidden="true"><i id="barfill"></i></div>
+  </div>
+</header>
+<div class="stripe"></div>
+<main class="wrap" id="app"></main>
+
+<script>
+const W=["cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez","once","doce","trece","catorce","quince"];
+const PR=["SEH-roh","OO-noh","dohs","trehs","KWAH-troh","SEEN-koh","sayss","see-EH-teh","OH-choh","NWEH-veh","dee-ESS","OHN-seh","DOH-seh","TREH-seh","kah-TOR-seh","KEEN-seh"];
+const norm=s=>(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9ñ ]/g," ").replace(/\s+/g," ").trim();
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// ---------- state ----------
+const KEY="es1_numeros_0_15_v1";
+let S={name:"",period:"",step:0,heard:[],sec:{},ws:[],speedBest:0};
+try{const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r));}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+// ---------- speech ----------
+let voice=null;
+function pickVoice(){
+  try{const v=speechSynthesis.getVoices(); voice=v.find(x=>/^es[-_](MX|US|419)/i.test(x.lang))||v.find(x=>/^es/i.test(x.lang))||null;}catch(e){voice=null}
+}
+try{pickVoice(); speechSynthesis.onvoiceschanged=pickVoice;}catch(e){}
+function say(t){
+  try{speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang=voice?voice.lang:"es-MX"; if(voice)u.voice=voice; u.rate=.85; speechSynthesis.speak(u); return true;}catch(e){return false}
+}
+const canSpeak=()=>{try{return "speechSynthesis" in window}catch(e){return false}};
+
+// ---------- pictures ----------
+const ICONS={
+  ball:'<svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#FFFDF8" stroke="#1F2A44" stroke-width="3"/><polygon points="17,10 23.7,14.8 21.1,22.7 12.9,22.7 10.3,14.8" fill="#1F2A44"/></svg>',
+  star:'<svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><polygon points="17,2 21.4,12 32,12.6 23.8,19.6 26.4,30 17,24.2 7.6,30 10.2,19.6 2,12.6 12.6,12" fill="#F2B544" stroke="#8A5A00" stroke-width="2" stroke-linejoin="round"/></svg>',
+  heart:'<svg width="34" height="34" viewBox="0 0 56 56" aria-hidden="true"><path d="M28 50 C 8 36, 2 24, 8 14 C 14 4, 26 6, 28 16 C 30 6, 42 4, 48 14 C 54 24, 48 36, 28 50 Z" fill="#E2582B"/></svg>',
+  apple:'<svg width="34" height="34" viewBox="0 0 18 22" aria-hidden="true"><path d="M9 6 C 3 4, 0 9, 1 13 C 2 18, 6 21, 9 19 C 12 21, 16 18, 17 13 C 18 9, 15 4, 9 6 Z" fill="#E2582B"/><path d="M9 6 C 9 3, 10 1, 12 0" stroke="#1F2A44" stroke-width="1.6" fill="none"/><path d="M10 3 C 13 1, 16 2, 16 4 C 13 5, 11 4, 10 3 Z" fill="#2A7F8F"/></svg>',
+  note:'<svg width="34" height="34" viewBox="0 0 56 56" aria-hidden="true"><ellipse cx="18" cy="44" rx="12" ry="9" fill="#2A7F8F" transform="rotate(-20 18 44)"/><rect x="27" y="6" width="5" height="38" fill="#2A7F8F"/><path d="M32 6 C 44 10, 48 18, 44 28 C 44 20, 38 16, 32 16 Z" fill="#2A7F8F"/></svg>',
+  book:'<svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect x="6" y="4" width="22" height="26" rx="3" fill="#1F6B78"/><rect x="9" y="4" width="3" height="26" fill="#FBF7F0" opacity=".6"/><rect x="15" y="10" width="10" height="3" rx="1" fill="#FBF7F0"/></svg>'
+};
+const pics=(k,n)=>`<span class="pic" role="img" aria-label="${n} pictures">${ICONS[k].repeat(n)}</span>`;
+
+// ---------- sections ----------
+const SECTIONS=[
+  {id:"start",label:"Start"},
+  {id:"listen",label:"1 · Listen"},
+  {id:"write",label:"2 · Write"},
+  {id:"count",label:"3 · Count"},
+  {id:"math",label:"4 · Math"},
+  {id:"code",label:"5 · Secret code"},
+  {id:"search",label:"6 · Word search"},
+  {id:"speed",label:"★ Speed"},
+  {id:"cert",label:"Finish"}
+];
+const SCORED=["listen","write","count","math","code","search"];
+
+// question banks (fixed so every student gets the same sheet)
+const LISTEN=[12,7,15,3,0,14,9,11];
+const WRITE=[8,13,5,10,2,14,6,15];
+const COUNT=[["ball",7,"balones"],["star",12,"estrellas"],["heart",9,"corazones"],["note",14,"notas"],["apple",11,"manzanas"]];
+const MATH=[["ball",3,"+","ball",5,8],["apple",6,"+","apple",6,12],["star",9,"-","star",4,5],["book",8,"+","book",7,15],["heart",10,"-","heart",7,3],["note",4,"+","note",9,13]];
+const CODE=[[3,"+",4,"G"],[6,"+",6,"E"],[10,"-",6,"N"],[5,"+",4,"I"],[8,"+",7,"A"],[11,"-",9,"L"]];
+const CODEKEY={0:"S",1:"R",2:"L",3:"P",4:"N",5:"T",6:"O",7:"G",8:"M",9:"I",10:"U",11:"B",12:"E",13:"C",14:"D",15:"A"};
+
+function secState(id){ if(!S.sec[id]) S.sec[id]={done:false,first:{},ans:{}}; return S.sec[id]; }
+
+function renderNav(){
+  const nav=$("#nav"); nav.innerHTML="";
+  SECTIONS.forEach((s,i)=>{
+    const b=document.createElement("button"); b.textContent=s.label;
+    if(i===S.step) b.className="on"; else if(S.sec[s.id]&&S.sec[s.id].done) b.className="done";
+    b.onclick=()=>go(i); nav.appendChild(b);
+  });
+  const done=SCORED.filter(id=>S.sec[id]&&S.sec[id].done).length;
+  $("#barfill").style.width=(done/SCORED.length*100)+"%";
+}
+function go(i){ S.step=i; save(); render(); window.scrollTo(0,0); }
+function nextBtn(label){ return `<div class="row" style="margin-top:16px"><button class="btn navy" id="next">${label||"Next activity →"}</button></div>`; }
+function bindNext(){ const n=$("#next"); if(n) n.onclick=()=>go(Math.min(S.step+1,SECTIONS.length-1)); }
+
+// generic typed question block
+function typedBlock(id,items,opts){
+  // items: [{key, prompt(html), answer(norm string), placeholder}]
+  const st=secState(id);
+  let h="";
+  items.forEach((it,i)=>{
+    const v=st.ans[it.key]||""; const ok=norm(v)===it.answer;
+    h+=`<div class="q"><span class="qn">${i+1}.</span>${it.prompt}
+      <label class="sr" for="in_${id}_${i}">Answer ${i+1}</label>
+      <input type="text" id="in_${id}_${i}" data-i="${i}" autocomplete="off" spellcheck="false" placeholder="${it.placeholder||"type here"}" value="${esc(v)}" class="${v?(ok?"ok":"bad"):""}">
+      <button class="btn teal" data-check="${i}">Check</button>
+      <span class="fb ${v?(ok?"ok":"bad"):""}" id="fb_${id}_${i}">${v?(ok?"✓ ¡Correcto!":"Try again"):""}</span></div>`;
+  });
+  return h;
+}
+function bindTyped(id,items,onAll){
+  const st=secState(id);
+  const check=i=>{
+    const it=items[i]; const inp=$(`#in_${id}_${i}`); const v=inp.value; if(!norm(v)) return; st.ans[it.key]=v;
+    const ok=norm(v)===it.answer; const fb=$(`#fb_${id}_${i}`);
+    if(!(it.key in st.first)) st.first[it.key]=ok;
+    inp.className=ok?"ok":"bad"; fb.className="fb "+(ok?"ok":"bad");
+    fb.textContent=ok?"✓ ¡Correcto!":(it.hint||"Try again. Use your number sheet!");
+    if(ok && it.onOk) it.onOk();
+    if(items.every(x=>norm(st.ans[x.key])===x.answer)){ if(!st.done){st.done=true;} save(); renderNav(); onAll&&onAll(); }
+    save();
+  };
+  document.querySelectorAll(`[data-check]`).forEach(b=>b.onclick=()=>check(+b.dataset.check));
+  items.forEach((it,i)=>{ const inp=$(`#in_${id}_${i}`); inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); check(i); const nx=$(`#in_${id}_${i+1}`); if(nx && norm(inp.value)===it.answer) nx.focus(); }}); });
+}
+const firstScore=id=>{const st=S.sec[id]; if(!st) return 0; return Object.values(st.first).filter(Boolean).length;};
+
+// ---------- views ----------
+function viewStart(){
+  let cards="";
+  W.forEach((w,n)=>{
+    const g=n<=5?"g1":n<=10?"g2":"g3"; const heard=S.heard.includes(n)?" heard":"";
+    cards+=`<button class="ncard ${g}${heard}" data-n="${n}" aria-label="Hear ${w}"><span class="n">${n}</span><span class="w">${w}</span><span class="s">🔊 ${PR[n]}</span></button>`;
+  });
+  return `<div class="card"><span class="tag">Start here</span>
+    <h2>Welcome! Today you learn the numbers on your own.</h2>
+    <p class="instr"><b>Use your number sheet</b> (the 0–15 infographic in Google Classroom) for every activity. Do the activities in order. At the end you get a certificate: take a screenshot and turn it in.</p>
+    <div class="row" style="margin-top:12px">
+      <label for="nm"><b>First and last name</b></label><input type="text" id="nm" value="${esc(S.name)}" style="width:260px">
+      <label for="pd"><b>Period</b></label><input type="text" id="pd" value="${esc(S.period)}" style="width:80px">
+    </div></div>
+  <div class="card"><span class="tag teal">Warm-up · 5 min</span>
+    <h2>Listen and repeat</h2>
+    <p class="instr">Click each number to hear it. Say it out loud (quietly!) after the voice. Click all 16.</p>
+    <div class="grid16" style="margin-top:12px">${cards}</div>
+    <p class="tip" id="heardmsg">You have heard <b>${S.heard.length}</b> of 16 numbers.${canSpeak()?"":" (No sound on this computer? Read the pronunciation under each word.)"}</p>
+    ${nextBtn("Start activity 1 →")}</div>`;
+}
+function bindStart(){
+  $("#nm").oninput=e=>{S.name=e.target.value;save();};
+  $("#pd").oninput=e=>{S.period=e.target.value;save();};
+  document.querySelectorAll(".ncard").forEach(b=>b.onclick=()=>{const n=+b.dataset.n; say(W[n]); if(!S.heard.includes(n)){S.heard.push(n);save();} b.classList.add("heard"); $("#heardmsg").innerHTML=`You have heard <b>${S.heard.length}</b> of 16 numbers.`;});
+  bindNext();
+}
+
+function listenItems(){
+  return LISTEN.map((n,i)=>({key:"l"+i,answer:String(n),placeholder:"digits: 0–15",
+    prompt:`<button class="btn" data-say="${n}" aria-label="Play number ${i+1}">🔊 Play</button>`}));
+}
+function viewListen(){
+  return `<div class="card"><span class="tag">Activity 1 · 6 min</span><h2>Listen and type the number</h2>
+  <p class="instr">Click 🔊 Play, listen, and type the number in <b>digits</b> (for example: 7). You can play it again.</p>
+  ${canSpeak()?"":`<p class="tip">No sound? Raise your hand or skip to Activity 2.</p>`}
+  ${typedBlock("listen",listenItems())}
+  <p class="tip">Hard ones: <b>dos / doce</b>, <b>seis / siete</b>, <b>cinco / quince</b>.</p>${nextBtn()}</div>`;
+}
+function bindListen(){ document.querySelectorAll("[data-say]").forEach(b=>b.onclick=()=>say(W[+b.dataset.say])); bindTyped("listen",listenItems()); bindNext(); }
+
+function writeItems(){ return WRITE.map((n,i)=>({key:"w"+i,answer:W[n],prompt:`<span class="big">${n}</span>`,placeholder:"word in Spanish"})); }
+function viewWrite(){
+  return `<div class="card"><span class="tag">Activity 2 · 6 min</span><h2>Write the word</h2>
+  <p class="instr">Type the number in <b>Spanish words</b>. Try first without looking, then check with your number sheet.</p>
+  ${typedBlock("write",writeItems())}${nextBtn()}</div>`;
+}
+function bindWrite(){ bindTyped("write",writeItems()); bindNext(); }
+
+function countItems(){ return COUNT.map((c,i)=>({key:"c"+i,answer:W[c[1]],prompt:`<div style="flex-basis:100%">${pics(c[0],c[1])}</div><span><b>¿Cuántos hay?</b> Hay</span>`,placeholder:"number word",hint:"Count again slowly, touching each picture."})); }
+function viewCount(){
+  return `<div class="card"><span class="tag teal">Activity 3 · 6 min</span><h2>¿Cuántos hay? Count!</h2>
+  <p class="instr"><b>¿Cuántos hay?</b> = How many are there? <b>Hay…</b> = There are… Count out loud in Spanish, then type the number in words.</p>
+  ${typedBlock("count",countItems())}${nextBtn()}</div>`;
+}
+function bindCount(){ bindTyped("count",countItems()); bindNext(); }
+
+function mathItems(){
+  return MATH.map((m,i)=>{
+    const sign=m[2]==="+"?"+":"−"; const word=m[2]==="+"?"más":"menos";
+    const prompt=m[2]==="+"
+      ? `<div style="flex-basis:100%" class="row">${pics(m[0],m[1])}<span class="plus">+</span>${pics(m[3],m[4])}</div><span><b>${W[m[1]]} ${word} ${W[m[4]]} son…</b></span>`
+      : `<div style="flex-basis:100%" class="row">${pics(m[0],m[1])}<span class="plus">−</span><span class="fred" style="font-size:30px">${m[4]}</span></div><span><b>${W[m[1]]} ${word} ${W[m[4]]} son…</b></span>`;
+    return {key:"m"+i,answer:W[m[5]],prompt,placeholder:"answer in words"};
+  });
+}
+function viewMath(){
+  return `<div class="card"><span class="tag teal">Activity 4 · 8 min</span><h2>Math with pictures</h2>
+  <p class="instr"><b>+ más</b> · <b>− menos</b> · <b>= son</b>. Solve and type the answer in <b>Spanish words</b>.</p>
+  ${typedBlock("math",mathItems())}${nextBtn()}</div>`;
+}
+function bindMath(){ bindTyped("math",mathItems()); bindNext(); }
+
+function codeItems(){
+  return CODE.map((c,i)=>{ const r=c[1]==="+"?c[0]+c[2]:c[0]-c[2];
+    return {key:"k"+i,answer:W[r],prompt:`<span class="fred" style="font-size:24px;min-width:240px">${W[c[0]]} ${c[1]==="+"?"más":"menos"} ${W[c[2]]} = </span>`,placeholder:"answer in words",onOk:()=>fillSlots()}; });
+}
+function fillSlots(){
+  const st=secState("code");
+  CODE.forEach((c,i)=>{ const r=c[1]==="+"?c[0]+c[2]:c[0]-c[2]; const ok=norm(st.ans["k"+i])===W[r]; const el=$("#slot"+i); if(el) el.textContent=ok?CODEKEY[r]:"?"; });
+  const all=CODE.every((c,i)=>{const r=c[1]==="+"?c[0]+c[2]:c[0]-c[2]; return norm(st.ans["k"+i])===W[r];});
+  const m=$("#codemsg"); if(m) m.innerHTML=all?"🎉 <b>¡GENIAL!</b> means <i>great / awesome</i>. You cracked the code!":"Solve each problem to reveal a letter.";
+}
+function viewCode(){
+  let key=""; Object.keys(CODEKEY).forEach(n=>key+=`<div><b>${n}</b>${CODEKEY[n]}</div>`);
+  let slots=""; CODE.forEach((c,i)=>slots+=`<span id="slot${i}">?</span>`);
+  return `<div class="card"><span class="tag yel">Activity 5 · 8 min</span><h2>Secret code</h2>
+  <p class="instr">Solve each problem in <b>Spanish words</b>. Each answer is a number. The key changes the number into a letter. What is the secret word?</p>
+  <div class="key" aria-label="Code key">${key}</div>
+  <div class="slots" aria-live="polite">${slots}</div><p class="tip" id="codemsg">Solve each problem to reveal a letter.</p>
+  ${typedBlock("code",codeItems())}${nextBtn()}</div>`;
+}
+function bindCode(){ bindTyped("code",codeItems(),fillSlots); fillSlots(); bindNext(); }
+
+// ---------- word search ----------
+const WS_WORDS=["CERO","UNO","DOS","TRES","CUATRO","CINCO","SEIS","SIETE","OCHO","NUEVE","DIEZ","ONCE","DOCE","TRECE","CATORCE","QUINCE"];
+const N=13; let WS=null, wsSel=null;
+function rng(seed){ return ()=>{ seed=(seed*1664525+1013904223)%4294967296; return seed/4294967296; }; }
+function buildWS(){
+  for(let seed=7;seed<500;seed++){
+    const r=rng(seed); const g=Array.from({length:N},()=>Array(N).fill("")); const pos={}; let okAll=true;
+    const dirs=[[0,1],[1,0],[1,1],[-1,1]];
+    for(const w of [...WS_WORDS].sort((a,b)=>b.length-a.length)){
+      let placed=false;
+      for(let t=0;t<300&&!placed;t++){
+        const d=dirs[Math.floor(r()*dirs.length)]; const row=Math.floor(r()*N), col=Math.floor(r()*N);
+        const er=row+d[0]*(w.length-1), ec=col+d[1]*(w.length-1);
+        if(er<0||er>=N||ec<0||ec>=N) continue;
+        let fit=true; for(let k=0;k<w.length;k++){const c=g[row+d[0]*k][col+d[1]*k]; if(c&&c!==w[k]){fit=false;break;}}
+        if(!fit) continue;
+        for(let k=0;k<w.length;k++) g[row+d[0]*k][col+d[1]*k]=w[k];
+        pos[w]=[row,col,er,ec]; placed=true;
+      }
+      if(!placed){okAll=false;break;}
+    }
+    if(!okAll) continue;
+    const L="ABCDEFGHIJLMNOPRSTUVZ";
+    for(let i=0;i<N;i++)for(let j=0;j<N;j++) if(!g[i][j]) g[i][j]=L[Math.floor(r()*L.length)];
+    return {g,pos};
+  }
+}
+function cellsBetween(a,b){
+  const dr=Math.sign(b[0]-a[0]), dc=Math.sign(b[1]-a[1]); const len=Math.max(Math.abs(b[0]-a[0]),Math.abs(b[1]-a[1]));
+  if(!(a[0]===b[0]||a[1]===b[1]||Math.abs(b[0]-a[0])===Math.abs(b[1]-a[1]))) return null;
+  const out=[]; for(let k=0;k<=len;k++) out.push([a[0]+dr*k,a[1]+dc*k]); return out;
+}
+function foundCells(){ const set=new Set(); (S.ws||[]).forEach(w=>{const p=WS.pos[w]; cellsBetween([p[0],p[1]],[p[2],p[3]]).forEach(c=>set.add(c.join(",")));}); return set; }
+function viewSearch(){
+  if(!WS) WS=buildWS();
+  const fc=foundCells(); let cells="";
+  for(let i=0;i<N;i++)for(let j=0;j<N;j++) cells+=`<button data-r="${i}" data-c="${j}" class="${fc.has(i+","+j)?"found":""}" aria-label="row ${i+1} column ${j+1} letter ${WS.g[i][j]}">${WS.g[i][j]}</button>`;
+  let list=""; WS_WORDS.forEach(w=>list+=`<span class="${S.ws.includes(w)?"f":""}">${w.toLowerCase()}</span>`);
+  return `<div class="card"><span class="tag yel">Activity 6 · 10 min</span><h2>Word search: find the numbers</h2>
+  <p class="instr">Click the <b>first letter</b> of a word, then the <b>last letter</b>. Words go across, down, or diagonally. Find at least <b>10</b> to finish. Can you find all 16?</p>
+  <p class="tip" id="wsmsg">Found: <b>${S.ws.length}</b> / 16</p>
+  <div class="ws" style="margin-top:12px"><div class="wsgrid" id="wsgrid" style="grid-template-columns:repeat(${N},auto)">${cells}</div>
+  <div class="wslist">${list}</div></div>${nextBtn()}</div>`;
+}
+function bindSearch(){
+  document.querySelectorAll("#wsgrid button").forEach(b=>b.onclick=()=>{
+    const p=[+b.dataset.r,+b.dataset.c];
+    if(!wsSel){ wsSel=p; b.classList.add("sel"); return; }
+    const cells=cellsBetween(wsSel,p); const prev=wsSel; wsSel=null;
+    document.querySelectorAll("#wsgrid .sel").forEach(x=>x.classList.remove("sel"));
+    if(!cells) return;
+    const word=cells.map(c=>WS.g[c[0]][c[1]]).join(""); const rev=[...word].reverse().join("");
+    const hit=WS_WORDS.find(w=>(w===word||w===rev) && !S.ws.includes(w) && (()=>{const q=WS.pos[w]; const s=[[q[0],q[1]],[q[2],q[3]]].map(x=>x.join(",")); return s.includes(prev.join(","))&&s.includes(p.join(","));})());
+    if(hit){ S.ws.push(hit); const st=secState("search"); if(S.ws.length>=10) st.done=true; save(); render(); }
+  });
+  bindNext();
+}
+
+// ---------- speed ----------
+let SP=null;
+function viewSpeed(){
+  return `<div class="card"><span class="tag navy">★ Bonus · fast finishers</span><h2>Speed challenge: 60 seconds</h2>
+  <p class="instr">A number appears. Click the correct word as fast as you can. Beat your best score!</p>
+  <p class="tip">Your best score: <b>${S.speedBest}</b></p>
+  <div id="sp" style="margin-top:14px"><button class="btn" id="spgo">Start ▶</button></div>${nextBtn("Go to my certificate →")}</div>`;
+}
+function spRound(){
+  const n=Math.floor(Math.random()*16); const opts=new Set([n]);
+  const near=[n-1,n+1,(n+10)%16,(n+6)%16].filter(x=>x>=0&&x<=15);
+  while(opts.size<4){ opts.add(near.length?near.splice(Math.floor(Math.random()*near.length),1)[0]:Math.floor(Math.random()*16)); }
+  const arr=[...opts].sort(()=>Math.random()-.5);
+  $("#sp").innerHTML=`<div class="row" style="justify-content:space-between"><span class="timer" id="spt">${SP.left}</span><span class="fred" style="font-size:26px">Score: ${SP.score}</span></div>
+  <div class="big" style="font-size:90px;text-align:center">${n}</div>
+  <div class="choices">${arr.map(x=>`<button data-x="${x}">${W[x]}</button>`).join("")}</div>`;
+  document.querySelectorAll("#sp [data-x]").forEach(b=>b.onclick=()=>{ if(+b.dataset.x===n) SP.score++; else SP.score=Math.max(0,SP.score-1); spRound(); });
+}
+function bindSpeed(){
+  $("#spgo").onclick=()=>{
+    SP={score:0,left:60}; spRound();
+    SP.t=setInterval(()=>{ SP.left--; const t=$("#spt"); if(t) t.textContent=SP.left;
+      if(SP.left<=0){ clearInterval(SP.t); if(SP.score>S.speedBest){S.speedBest=SP.score; save();}
+        const sp=$("#sp"); if(sp) sp.innerHTML=`<p class="fred" style="font-size:30px">Time! Score: ${SP.score}</p><button class="btn" id="spgo">Play again ▶</button>`; bindSpeed(); } },1000);
+  };
+  bindNext();
+}
+
+// ---------- certificate ----------
+function viewCert(){
+  const rows=[["1 · Listen",firstScore("listen"),LISTEN.length],["2 · Write",firstScore("write"),WRITE.length],["3 · Count",firstScore("count"),COUNT.length],["4 · Math",firstScore("math"),MATH.length],["5 · Secret code",firstScore("code"),CODE.length],["6 · Word search",S.ws.length,16]];
+  const tot=rows.reduce((a,r)=>a+r[1],0), max=rows.reduce((a,r)=>a+r[2],0);
+  const doneAll=SCORED.every(id=>S.sec[id]&&S.sec[id].done);
+  const d=new Date().toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+  return `<div class="cert">
+    <div class="eyebrow">Español 1 · Clase 6</div>
+    <h2>${doneAll?"¡Felicidades!":"Almost there!"}</h2>
+    <p style="font-size:22px;margin:6px 0 0"><b>${esc(S.name||"[type your name on the Start page]")}</b> · Period ${esc(S.period||"__")} · ${d}</p>
+    <p style="margin:4px 0 0;color:#D9DEE8">${doneAll?"I practiced the numbers 0–15 in Spanish.":"Finish every activity (green tabs) to complete your certificate."}</p>
+    <table>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]} / ${r[2]}</td></tr>`).join("")}
+    <tr><td>★ Speed best</td><td>${S.speedBest}</td></tr>
+    <tr><td><b>Total (first try)</b></td><td>${tot} / ${max}</td></tr></table>
+  </div>
+  <div class="card" style="margin-top:16px"><span class="tag">Turn it in</span>
+    <h2>Take a screenshot</h2>
+    <p class="instr">On a Chromebook press <b>Ctrl + Show windows</b> (the key with the rectangles). Then go to the assignment in <b>Google Classroom</b>, click <b>Add or create → File</b>, add the screenshot and click <b>Turn in</b>.</p>
+    <p class="tip">Scores count your <b>first try</b>. Fixing mistakes is still great practice!</p>
+    <div class="row" style="margin-top:12px"><button class="btn ghost" id="reset">Start over (clears my answers)</button><span id="resetmsg" class="fb"></span></div>
+  </div>`;
+}
+let resetArmed=false;
+function bindCert(){
+  $("#reset").onclick=()=>{ if(!resetArmed){resetArmed=true; $("#resetmsg").textContent="Click again to erase everything."; return;} S={name:S.name,period:S.period,step:0,heard:[],sec:{},ws:[],speedBest:0}; save(); resetArmed=false; render(); };
+}
+
+const VIEWS={start:[viewStart,bindStart],listen:[viewListen,bindListen],write:[viewWrite,bindWrite],count:[viewCount,bindCount],math:[viewMath,bindMath],code:[viewCode,bindCode],search:[viewSearch,bindSearch],speed:[viewSpeed,bindSpeed],cert:[viewCert,bindCert]};
+function render(){
+  if(SP&&SP.t){clearInterval(SP.t); SP=null;}
+  renderNav(); const id=SECTIONS[S.step].id; $("#app").innerHTML=VIEWS[id][0](); VIEWS[id][1]();
+}
+render();
+</script>
+</body>
+</html>
